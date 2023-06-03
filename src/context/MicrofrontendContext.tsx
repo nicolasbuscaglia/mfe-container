@@ -33,6 +33,7 @@ const MicrofrontendProvider = ({ children }: Props) => {
   const emitter = createNanoEvents<Events>();
 
   useEffect(() => {
+    // This is a fake authentication. Here should apply auth mechanism.
     if (user.email) {
       emitter.emit("userLoggedIn", true);
     } else {

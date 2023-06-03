@@ -13,14 +13,18 @@ const remotes = (isServer) => {
 
 const nextConfig = {
   reactStrictMode: true,
-  webpack5: true,
   webpack(config, options) {
     config.plugins.push(
       new NextFederationPlugin({
         name: "mfeContainer",
         filename: "static/chunks/remoteEntry.js",
         remotes: remotes(options.isServer),
-        shared: {},
+        shared: {
+          axios: {
+            singleton: true,
+            eager: true,
+          },
+        },
       })
     );
     return config;
